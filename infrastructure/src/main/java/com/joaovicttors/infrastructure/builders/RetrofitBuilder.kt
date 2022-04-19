@@ -32,12 +32,12 @@ class RetrofitBuilder {
             .build();
     }
 
-    private fun buildLoggingInterceptor() : HttpLoggingInterceptor {
+    private fun buildLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor()
             .apply { level = HttpLoggingInterceptor.Level.BODY }
     }
 
     companion object {
-        const val BASE_URL: String = "https://api.aniapi.com/v1/"
+        const val BASE_URL: String = "https://api.aniapi.com/"
     }
 }
