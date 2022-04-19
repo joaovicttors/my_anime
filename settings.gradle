@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "my_anime"
 include ':application'
+include ':infrastructure'
+include ':domain'
+include ':data'
