@@ -13,15 +13,15 @@ import com.joaovicttors.infrastructure.services.AnimeRemoteService
 import com.joaovicttors.infrastructure.services.retrofit.AnimeRetrofitService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
+
+    private val animeRepository: AnimeRepository by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val animeService: AnimeRemoteService = RetrofitBuilder().build<AnimeRetrofitService>()
-        val animeRemoteDataSource: AnimeRemoteDataSource = AnimeRemoteDataSourceImpl(animeService)
-        val animeRepository: AnimeRepository = AnimeRepositoryImpl(animeRemoteDataSource)
 
         GlobalScope.launch {
             val response = animeRepository.retrieveRandomAnime()

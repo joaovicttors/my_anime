@@ -14,8 +14,10 @@ buildscript {
 
 ext {
     coroutines_android_version = "1.5.2"
-    moshi_version = "1.13.0"
+    gson_version = "2.9.0"
+    koin_version = "3.1.6"
     logging_interceptor_version = "4.9.3"
+    moshi_version = "1.13.0"
     retrofit_converter_version = "2.9.0"
     retrofit_version = "2.9.0"
 }
