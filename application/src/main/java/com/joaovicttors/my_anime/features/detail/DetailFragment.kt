@@ -33,7 +33,8 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun buildViewModelBindings() {
-        bind(viewModel.success) { anime -> dataBinding.anime = anime }
+        bind(viewModel.success) { dataBinding.anime = it }
+        bind(viewModel.loading) { dataBinding.loading = it }
     }
 
     private fun setupActionBar() {

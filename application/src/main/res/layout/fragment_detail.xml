@@ -8,6 +8,10 @@
         <variable
             name="anime"
             type="com.joaovicttors.domain.entities.Anime" />
+
+        <variable
+            name="loading"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,18 +32,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    bind:imageUrl="@{anime.coverImage}"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:imageUrl="@{anime.coverImage}" />
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/sixteen_size"
+                    android:layout_marginTop="@dimen/four_size"
                     android:text="@{anime.title}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/twenty_value"
-                    android:layout_marginStart="@dimen/sixteen_size"
-                    android:layout_marginTop="@dimen/four_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/banner_image" />
 
@@ -47,11 +51,11 @@
                     android:id="@+id/format"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/sixteen_size"
+                    android:layout_marginTop="@dimen/four_size"
                     android:text="@{anime.format.name()}"
                     android:textColor="@color/teal_200"
                     android:textSize="@dimen/fourteen_value"
-                    android:layout_marginStart="@dimen/sixteen_size"
-                    android:layout_marginTop="@dimen/four_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title" />
 
@@ -60,45 +64,83 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:progressTint="@color/white"
-                    android:secondaryProgressTint="@color/white"
-                    android:stepSize="0.1"
-                    android:rating="@{anime.scoreFormatted}"
                     android:layout_marginStart="@dimen/sixteen_size"
                     android:layout_marginTop="@dimen/twenty_four_size"
+                    android:numStars="5"
+                    android:progressTint="@color/white"
+                    android:rating="@{anime.scoreFormatted}"
+                    android:secondaryProgressTint="@color/white"
+                    android:stepSize="0.1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/format"/>
+                    app:layout_constraintTop_toBottomOf="@id/format" />
 
                 <TextView
                     android:id="@+id/average"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    bind:floatText="@{anime.scoreFormatted}"
+                    android:layout_marginStart="@dimen/four_size"
+                    android:layout_marginTop="@dimen/twenty_four_size"
                     android:textColor="@color/white"
                     android:textSize="@dimen/fourteen_value"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/four_size"
-                    android:layout_marginTop="@dimen/twenty_four_size"
                     app:layout_constraintStart_toEndOf="@id/rating_bar"
-                    app:layout_constraintTop_toBottomOf="@id/format" />
+                    app:layout_constraintTop_toBottomOf="@id/format"
+                    bind:floatText="@{anime.scoreFormatted}" />
 
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/sixteen_size"
+                    android:layout_marginTop="@dimen/sixteen_size"
+                    android:layout_marginEnd="@dimen/sixteen_size"
                     android:text="@{anime.description}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sixteen_value"
-                    android:layout_marginEnd="@dimen/sixteen_size"
-                    android:layout_marginStart="@dimen/sixteen_size"
-                    android:layout_marginTop="@dimen/sixteen_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/average" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loading_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero_size"
+            android:background="@color/black"
+            bind:visibleByBoolean="@{loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progress_circular"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

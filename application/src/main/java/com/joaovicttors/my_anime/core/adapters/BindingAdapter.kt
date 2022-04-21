@@ -1,8 +1,10 @@
 package com.joaovicttors.my_anime.core.adapters
 
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.joaovicttors.my_anime.R
 import com.squareup.picasso.Picasso
@@ -25,7 +27,7 @@ fun floatText(textView: TextView, text: Float) {
     textView.text = text.toString()
 }
 
-@BindingAdapter("bind:text2")
-fun text2(textView: TextView, text: String) {
-    textView.text = text.replace("\\<.*?\\>", "")
+@BindingAdapter("bind:visibleByBoolean")
+fun visibleByBoolean(constraintLayout: ConstraintLayout, visible: Boolean) {
+    constraintLayout.visibility = if (visible) View.VISIBLE else View.GONE
 }
