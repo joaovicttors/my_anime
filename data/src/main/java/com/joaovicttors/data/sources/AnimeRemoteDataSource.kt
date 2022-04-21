@@ -4,5 +4,6 @@ import com.joaovicttors.domain.entities.Anime
 import com.joaovicttors.domain.entities.Response
 
 interface AnimeRemoteDataSource {
-    suspend fun retrieveRandomAnime(): Response<List<Anime>>
+    suspend fun retrieveAnimeList(): Response<List<Anime>>
+    suspend fun retrieveSpecificAnime(id: Int): Response<Anime>
 }

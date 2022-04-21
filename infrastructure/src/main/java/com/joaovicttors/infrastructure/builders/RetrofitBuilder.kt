@@ -28,16 +28,11 @@ class RetrofitBuilder {
 
     fun buildClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(buildLoggingInterceptor())
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
             .build();
     }
 
-    private fun buildLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor()
-            .apply { level = HttpLoggingInterceptor.Level.BODY }
-    }
-
     companion object {
-        const val BASE_URL: String = "https://api.aniapi.com/"
+        const val BASE_URL: String = "https://api.aniapi.com"
     }
 }

@@ -8,7 +8,6 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
-    implementation "com.google.code.gson:gson:$gson_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"

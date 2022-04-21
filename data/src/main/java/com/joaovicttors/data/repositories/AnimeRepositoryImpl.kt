@@ -9,7 +9,11 @@ class AnimeRepositoryImpl(
     private val remoteDataSource: AnimeRemoteDataSource
 ) : AnimeRepository {
 
-    override suspend fun retrieveRandomAnime(): Response<List<Anime>> {
-        return remoteDataSource.retrieveRandomAnime()
+    override suspend fun retrieveAnimeList(): Response<List<Anime>> {
+        return remoteDataSource.retrieveAnimeList()
+    }
+
+    override suspend fun retrieveSpecificAnime(id: Int): Response<Anime> {
+        return remoteDataSource.retrieveSpecificAnime(id)
     }
 }
