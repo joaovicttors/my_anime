@@ -1,6 +1,7 @@
 package com.joaovicttors.my_anime.features.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.add
@@ -15,6 +16,9 @@ import com.joaovicttors.my_anime.core.extensions.bind
 import com.joaovicttors.my_anime.core.extensions.setupToolbar
 import com.joaovicttors.my_anime.databinding.ActivityHomeBinding
 import com.joaovicttors.my_anime.features.detail.DetailFragment
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class HomeActivity : BaseActivity(), RecyclerViewInterface {
@@ -32,7 +36,7 @@ class HomeActivity : BaseActivity(), RecyclerViewInterface {
         buildViewModelBindings()
         buildRecycleViewFactory()
 
-        setupToolbar(dataBinding.toolbar,"My Anime", false)
+        setupToolbar(dataBinding.toolbar, "My Anime", false)
 
         viewModel.retrieveAnimeList()
     }
@@ -55,7 +59,17 @@ class HomeActivity : BaseActivity(), RecyclerViewInterface {
     }
 
     private fun buildViewModelBindings() {
-        bind(viewModel.success) { anime -> adapter.addItem(anime) }
+        bind(viewModel.success) { adapter.addItem(it) }
+
+        // TODO joao.santana
+        bind(viewModel.loading) {
+            if (it) {
+                dataBinding.shimmerFrame.startShimmer()
+            } else
+                dataBinding.shimmerFrame.stopShimmer().also {
+                    dataBinding.shimmerFrame.visibility = View.GONE
+                }
+        }
     }
 
     private fun buildRecycleViewFactory() {
