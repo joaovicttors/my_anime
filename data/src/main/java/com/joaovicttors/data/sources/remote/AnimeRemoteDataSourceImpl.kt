@@ -1,20 +1,21 @@
-package com.joaovicttors.data.sources
+package com.joaovicttors.data.sources.remote
 
-import com.joaovicttors.data.mappers.AnimeMapper
+import com.joaovicttors.data.mappers.AnimeResponseMapper
+import com.joaovicttors.data.sources.remote.service.AnimeRemoteService
 import com.joaovicttors.domain.entities.Anime
 import com.joaovicttors.domain.entities.Response
-import com.joaovicttors.infrastructure.services.AnimeRemoteService
 
 class AnimeRemoteDataSourceImpl(
-    private val animeRetrofitService: AnimeRemoteService
+    private val remoteService: AnimeRemoteService,
+    private val responseMapper: AnimeResponseMapper
 ) : AnimeRemoteDataSource {
 
     private var currentPage: Int = 1;
 
     override suspend fun retrieveAnimeList(): Response<List<Anime>> {
         return try {
-            animeRetrofitService.retrieveAnimeListAsync(currentPage).let { response ->
-                Response.Success(response.data.documents.map { AnimeMapper.modelToEntity(it) })
+            remoteService.retrieveAnimeListAsync(currentPage).let { response ->
+                Response.Success(response.data.documents.map { responseMapper.mapToDomainEntity(it) })
             }
         } catch (error: Exception) {
             Response.Error(error.message)
@@ -25,8 +26,8 @@ class AnimeRemoteDataSourceImpl(
 
     override suspend fun retrieveSpecificAnime(id: Int): Response<Anime> {
         return try {
-            animeRetrofitService.retrieveSpecificAnimeAsync(id).let { response ->
-                Response.Success(AnimeMapper.modelToEntity(response.data))
+            remoteService.retrieveSpecificAnimeAsync(id).let { response ->
+                Response.Success(responseMapper.mapToDomainEntity(response.data))
             }
         } catch (error: Exception) {
             Response.Error(error.message)

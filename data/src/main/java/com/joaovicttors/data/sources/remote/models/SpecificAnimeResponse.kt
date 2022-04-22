@@ -1,14 +1,13 @@
-package com.joaovicttors.infrastructure.models.remote
+package com.joaovicttors.data.sources.remote.models
 
-import com.joaovicttors.infrastructure.models.AnimeModel
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SpecificAnimeRemoteModel(
-    @Json(name = STATUS_CODE) val statusCode: Int?,
-    @Json(name = MESSAGE) val message: String?,
-    @Json(name = DATA) val data: AnimeModel
+data class SpecificAnimeResponse(
+    @Json(name = STATUS_CODE) val statusCode: Int,
+    @Json(name = MESSAGE) val message: String,
+    @Json(name = DATA) val data: AnimeResponse
 ) {
 
     private companion object {

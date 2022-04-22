@@ -1,5 +1,6 @@
 package com.joaovicttors.my_anime.features.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -16,9 +17,6 @@ import com.joaovicttors.my_anime.core.extensions.bind
 import com.joaovicttors.my_anime.core.extensions.setupToolbar
 import com.joaovicttors.my_anime.databinding.ActivityHomeBinding
 import com.joaovicttors.my_anime.features.detail.DetailFragment
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class HomeActivity : BaseActivity(), RecyclerViewInterface {
@@ -55,13 +53,15 @@ class HomeActivity : BaseActivity(), RecyclerViewInterface {
     }
 
     override fun onFavoritePressed(anime: Anime) {
-        TODO("Not yet implemented")
+        viewModel.markAnimeAsFavorite(anime)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun buildViewModelBindings() {
-        bind(viewModel.success) { adapter.addItem(it) }
+        bind(viewModel.markAsFavoriteSuccess) { adapter.notifyDataSetChanged() }
+        bind(viewModel.retrieveAnimeListSuccess) { adapter.addItem(it) }
 
-        // TODO joao.santana
+        // TODO melhorar esse metodo aqui
         bind(viewModel.loading) {
             if (it) {
                 dataBinding.shimmerFrame.startShimmer()

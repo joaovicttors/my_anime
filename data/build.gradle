@@ -5,7 +5,16 @@ targetCompatibility = "8"
 
 dependencies {
     implementation project(':domain')
-    implementation project(':infrastructure')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // TODO joao
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_converter_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    implementation "android.arch.persistence.room:runtime:1.1.1"
 }
