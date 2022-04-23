@@ -13,7 +13,6 @@ interface AnimeDaoService : AnimeLocalService {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     override suspend fun insertFavoriteAnime(anime: AnimeEntity)
 
-    // TODO mudar nome desse method
     @Query("SELECT EXISTS (SELECT 1 FROM anime WHERE id = :animeId)")
     override suspend fun existAnimeById(animeId: Int): Boolean
 }

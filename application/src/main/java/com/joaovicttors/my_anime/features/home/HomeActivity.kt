@@ -26,6 +26,8 @@ class HomeActivity : BaseActivity(), RecyclerViewInterface {
     private lateinit var adapter: HomeAdapter
     private lateinit var dataBinding: ActivityHomeBinding
 
+    private var startShimmerBehavior: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,15 +66,16 @@ class HomeActivity : BaseActivity(), RecyclerViewInterface {
     }
 
     private fun buildShimmerBehavior(isLoading: Boolean) {
-        if (isLoading) {
-            dataBinding.shimmerFrame.startShimmer().also {
-                dataBinding.recycleView.visibility = View.GONE
-                dataBinding.shimmerFrame.visibility = View.VISIBLE
-            }
-        } else {
-            dataBinding.shimmerFrame.stopShimmer().also {
-                dataBinding.shimmerFrame.visibility = View.GONE
-                dataBinding.recycleView.visibility = View.VISIBLE
+        if (startShimmerBehavior) {
+            if (isLoading) {
+                dataBinding.shimmerFrame.startShimmer().also {
+                    dataBinding.shimmerFrame.visibility = View.VISIBLE
+                }
+            } else {
+                dataBinding.shimmerFrame.stopShimmer().also {
+                    dataBinding.shimmerFrame.visibility = View.GONE
+                    startShimmerBehavior = false
+                }
             }
         }
     }
