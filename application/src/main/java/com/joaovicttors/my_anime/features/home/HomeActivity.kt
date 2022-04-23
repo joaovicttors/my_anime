@@ -58,17 +58,22 @@ class HomeActivity : BaseActivity(), RecyclerViewInterface {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun buildViewModelBindings() {
+        bind(viewModel.loading, ::buildShimmerBehavior)
         bind(viewModel.markAsFavoriteSuccess) { adapter.notifyDataSetChanged() }
         bind(viewModel.retrieveAnimeListSuccess) { adapter.addItem(it) }
+    }
 
-        // TODO melhorar esse metodo aqui
-        bind(viewModel.loading) {
-            if (it) {
-                dataBinding.shimmerFrame.startShimmer()
-            } else
-                dataBinding.shimmerFrame.stopShimmer().also {
-                    dataBinding.shimmerFrame.visibility = View.GONE
-                }
+    private fun buildShimmerBehavior(isLoading: Boolean) {
+        if (isLoading) {
+            dataBinding.shimmerFrame.startShimmer().also {
+                dataBinding.recycleView.visibility = View.GONE
+                dataBinding.shimmerFrame.visibility = View.VISIBLE
+            }
+        } else {
+            dataBinding.shimmerFrame.stopShimmer().also {
+                dataBinding.shimmerFrame.visibility = View.GONE
+                dataBinding.recycleView.visibility = View.VISIBLE
+            }
         }
     }
 

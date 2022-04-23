@@ -9,7 +9,18 @@ class MarkAnimeAsFavoriteUseCase(
 ) {
 
     suspend operator fun invoke(anime: Anime): Response<Unit> {
+        return if (anime.favorite) delete(anime) else insert(anime)
+    }
+
+    private suspend fun delete(anime: Anime): Response<Unit> {
+        return animeRepository.deleteAnime(anime).also { if (it is Response.Success) swapFavoriteVariable(anime) }
+    }
+
+    private suspend fun insert(anime: Anime): Response<Unit> {
+        return animeRepository.insertAnime(anime).also { if (it is Response.Success) swapFavoriteVariable(anime) }
+    }
+
+    private fun swapFavoriteVariable(anime: Anime) {
         anime.favorite = !anime.favorite
-        return if (anime.favorite) animeRepository.insertAnime(anime) else animeRepository.deleteAnime(anime)
     }
 }

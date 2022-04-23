@@ -8,19 +8,14 @@ class RetrieveAnimeListUseCase(
     private val animeRepository: AnimeRepository
 ) {
 
-    // TODO melhorar esse method
     suspend operator fun invoke(): Response<List<Anime>> {
-        return animeRepository.retrieveAnimeList().let { response ->
-            when (response) {
-                is Response.Success -> response.apply {
-                    this.body.forEach { anime ->
-                        val test = animeRepository.existAnimeById(anime.id)
-                        if (test is Response.Success) {
-                            anime.favorite = test.body
-                        }
+        return animeRepository.retrieveAnimeList().also { response ->
+            if (response is Response.Success) {
+                response.body.onEach { anime ->
+                    animeRepository.existAnimeById(anime.id).also { exist ->
+                        if (exist is Response.Success) anime.favorite = exist.body
                     }
                 }
-                is Response.Error -> response
             }
         }
     }

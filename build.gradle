@@ -16,8 +16,10 @@ buildscript {
 ext {
     coroutines_android_version = "1.5.2"
     fragment_version = "1.4.1"
+    junit_version = '4.12'
     koin_version = "3.1.6"
     logging_interceptor_version = "4.9.3"
+    mockito_version = "4.0.0"
     moshi_version = "1.13.0"
     picasso_version = "2.71828"
     retrofit_converter_version = "2.9.0"
