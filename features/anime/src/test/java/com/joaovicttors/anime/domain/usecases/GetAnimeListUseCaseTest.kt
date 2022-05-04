@@ -85,7 +85,7 @@ internal class GetAnimeListUseCaseTest {
 
             val actualResponse = useCase(NoParam())
 
-            coVerify { animeRepository.insertAnimeListOnLocalStorage(expectedAnimeList) }
+            coVerify(exactly = 1) { animeRepository.insertAnimeListOnLocalStorage(expectedAnimeList) }
 
             assertTrue(actualResponse is Response.Success)
             assertEquals(expectedAnimeList, (actualResponse as Response.Success).data)
