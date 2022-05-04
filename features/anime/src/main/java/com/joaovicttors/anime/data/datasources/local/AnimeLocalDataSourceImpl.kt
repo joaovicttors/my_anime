@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 class AnimeLocalDataSourceImpl(
     private val mapper: AnimeLocalModelMapper,
     private val service: RoomAnimeService,
-    private val dispatcher: CoroutineDispatcher,
+    private val dispatcher: CoroutineDispatcher
 ) : AnimeLocalDataSource {
 
     override suspend fun getAnimeList(): Response<List<Anime>> {
