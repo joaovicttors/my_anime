@@ -16,8 +16,8 @@ class AnimeRemoteDataSourceImpl(
     override suspend fun getAnimeList(): Response<List<Anime>> {
         return try {
             withContext(dispatcher) { ->
-                service.getAnimeList().let { data ->
-                    data.map { mapper.mapToDomainEntity(it) }.let { mappedData ->
+                service.getAnimeList().let { response ->
+                    response.data.documents.map { mapper.mapToDomainEntity(it) }.let { mappedData ->
                         Response.Success(mappedData)
                     }
                 }

@@ -4,5 +4,5 @@ import com.joaovicttors.anime.data.models.AnimeRemoteModel
 
 interface RetrofitAnimeService {
 
-    suspend fun getAnimeList(): List<AnimeRemoteModel>
+    suspend fun getAnimeList(): AnimeRemoteModel
 }

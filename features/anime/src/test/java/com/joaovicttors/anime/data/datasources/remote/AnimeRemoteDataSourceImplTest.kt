@@ -8,7 +8,8 @@ import com.joaovicttors.base.Response
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import junit.framework.TestCase
+import junit.framework.Assert.assertEquals
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -49,22 +50,26 @@ internal class AnimeRemoteDataSourceImplTest {
 
             val actualResponse = dataSource.getAnimeList()
 
-            TestCase.assertTrue(actualResponse is Response.Error)
-            TestCase.assertEquals(expectedErrorMessage, (actualResponse as Response.Error).message)
+            assertTrue(actualResponse is Response.Error)
+            assertEquals(expectedErrorMessage, (actualResponse as Response.Error).message)
         }
 
     @Test
     fun `when getAll from service returns success response should getAnimeList returns success response`() =
         runBlocking { ->
             val expectedAnimeList = listOf<Anime>(mockk())
-            val animeRemoteModelList = listOf<AnimeRemoteModel>(mockk())
+            val animeListRemoteModel = mockk<AnimeRemoteModel>()
+            val animeRemoteModelList = listOf<AnimeRemoteModel.Documents>(mockk())
 
-            coEvery { service.getAnimeList() } returns animeRemoteModelList
+            coEvery { animeListRemoteModel.data } returns mockk()
+            coEvery { animeListRemoteModel.data.documents } returns animeRemoteModelList
+
+            coEvery { service.getAnimeList() } returns animeListRemoteModel
             coEvery { mapper.mapToDomainEntity(animeRemoteModelList.first()) } returns expectedAnimeList.first()
 
             val actualResponse = dataSource.getAnimeList()
 
-            TestCase.assertTrue(actualResponse is Response.Success)
-            TestCase.assertEquals(expectedAnimeList, (actualResponse as Response.Success).data)
+            assertTrue(actualResponse is Response.Success)
+            assertEquals(expectedAnimeList, (actualResponse as Response.Success).data)
         }
 }

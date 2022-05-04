@@ -38,6 +38,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
 
+    // GSON
+    implementation("com.google.code.gson:gson:$gson_version")
+
     // JUNIT
     testImplementation("junit:junit:$junit_version")
 
