@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "my_anime"
 include ':app'
+include ':features:anime'
+include ':common:base'
