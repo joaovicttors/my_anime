@@ -32,7 +32,7 @@ internal class AnimeRepositoryImplTest {
         runBlocking { ->
             repository.getAnimeListFromLocalStorage()
 
-            coVerify { localDataSource.getAnimeList() }
+            coVerify(exactly = 1) { localDataSource.getAnimeList() }
         }
 
     @Test
@@ -66,7 +66,7 @@ internal class AnimeRepositoryImplTest {
         runBlocking { ->
             repository.getAnimeListFromRemoteStorage()
 
-            coVerify { remoteDataSource.getAnimeList() }
+            coVerify(exactly = 1) { remoteDataSource.getAnimeList() }
         }
 
     @Test
@@ -100,6 +100,6 @@ internal class AnimeRepositoryImplTest {
         runBlocking { ->
             repository.insertAnimeListOnLocalStorage(emptyList())
 
-            coVerify { localDataSource.insertAnimeList(any()) }
+            coVerify(exactly = 1) { localDataSource.insertAnimeList(any()) }
         }
 }

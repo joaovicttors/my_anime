@@ -34,6 +34,10 @@ dependencies {
     // KOTLIN
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
 
+    // COROUTINES
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
+
     // JUNIT
     testImplementation("junit:junit:$junit_version")
 
