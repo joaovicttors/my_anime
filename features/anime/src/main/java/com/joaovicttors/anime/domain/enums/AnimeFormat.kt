@@ -5,6 +5,8 @@ enum class AnimeFormat {
 
     companion object {
 
-        fun value(index: Int): AnimeFormat = values()[index]
+        fun value(index: Int): AnimeFormat {
+            return runCatching { values()[index] }.getOrElse { values()[0] }
+        }
     }
 }
