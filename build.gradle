@@ -5,6 +5,8 @@ buildscript {
 
         coroutines_version = '1.6.1'
         gson_version = '2.9.0'
+        koin_version = '3.1.6'
+        lifecycle_version = '2.5.0-beta01'
         retrofit_version = '2.9.0'
         room_version = '2.4.2'
 

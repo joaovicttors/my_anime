@@ -17,7 +17,7 @@ import org.junit.Test
 internal class GetAnimeListUseCaseTest {
 
     private lateinit var animeRepository: AnimeRepository
-    private lateinit var useCase: BaseUseCase<NoParam, Response<List<Anime>>>
+    private lateinit var useCase: BaseUseCase<NoParam, List<Anime>>
 
     @Before
     fun before() {

@@ -8,7 +8,7 @@ import com.joaovicttors.base.usecase.utilities.NoParam
 
 class GetAnimeListUseCase(
     private val animeRepository: AnimeRepository
-) : BaseUseCase<NoParam, Response<List<Anime>>>() {
+) : BaseUseCase<NoParam, List<Anime>>() {
 
     override suspend operator fun invoke(param: NoParam): Response<List<Anime>> {
 
