@@ -31,6 +31,15 @@ android {
 dependencies {
     implementation project(":common:base")
 
+    // APP COMPAT
+    implementation("androidx.appcompat:appcompat:$appcompat_version")
+
+    // CONSTRAINT
+    implementation("androidx.constraintlayout:constraintlayout:$constraintlayout_version")
+
+    // CORE
+    implementation("androidx.core:core-ktx:$core_ktx_version")
+
     // KOTLIN
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
 
