@@ -41,7 +41,7 @@ internal class AnimeFormatTest {
     }
 
     @Test
-    fun `when value is out of range should return TV as default format`() {
-        assertEquals(AnimeFormat.TV, AnimeFormat.value(index = 7))
+    fun `when value is out of range should return UNKNOWN as default format`() {
+        assertEquals(AnimeFormat.UNKNOWN, AnimeFormat.value(index = 7))
     }
 }
