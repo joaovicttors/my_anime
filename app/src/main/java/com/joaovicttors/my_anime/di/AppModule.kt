@@ -7,6 +7,7 @@ import com.joaovicttors.anime.data.datasources.remote.service.RetrofitAnimeServi
 import com.joaovicttors.my_anime.DatabaseTest
 import com.joaovicttors.my_anime.constants.RetrofitConstants
 import com.joaovicttors.my_anime.constants.RoomConstants
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.Module
@@ -18,6 +19,8 @@ import retrofit2.create
 object AppModule {
 
     val providersModule = module { ->
+
+        single { Dispatchers.IO }
 
         single {
             Retrofit.Builder()

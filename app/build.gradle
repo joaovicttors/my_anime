@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -16,23 +17,33 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    dataBinding {
+        enabled true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
 dependencies {
+    implementation project(":common:base")
     implementation project(":features:anime")
+
+    kapt "androidx.room:room-compiler:$room_version"
+
 
     // APP COMPAT
     implementation("androidx.appcompat:appcompat:$appcompat_version")
@@ -45,6 +56,10 @@ dependencies {
 
     // KOTLIN
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
+
+    // NAVIGATION
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigation_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigation_version")
 
     // COROUTINES
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")

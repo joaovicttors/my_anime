@@ -12,22 +12,24 @@ import com.joaovicttors.anime.data.repositories.AnimeRepositoryImpl
 import com.joaovicttors.anime.domain.entities.Anime
 import com.joaovicttors.anime.domain.repositories.AnimeRepository
 import com.joaovicttors.anime.domain.usecases.GetAnimeListUseCase
-import com.joaovicttors.anime.presentation.features.anime_list.AnimeListViewModel
+import com.joaovicttors.anime.presentation.features.anime_list.view.AnimeListViewModel
 import com.joaovicttors.base.BaseMapper
 import com.joaovicttors.base.usecase.BaseUseCase
 import com.joaovicttors.base.usecase.utilities.NoParam
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
+// TODO joao.santana
 object AnimeModule {
 
     val dataLayer = module { ->
 
-        single<BaseMapper<AnimeLocalModel, Anime>> { AnimeLocalModelMapper() }
-        single<BaseMapper<AnimeRemoteModel.Documents, Anime>> { AnimeRemoteModelMapper() }
+        single(named("test")) { AnimeLocalModelMapper() }
+        single(named("test2")) { AnimeRemoteModelMapper() }
 
-        single<AnimeLocalDataSource> { AnimeLocalDataSourceImpl(get(), get(), get()) }
-        single<AnimeRemoteDataSource> { AnimeRemoteDataSourceImpl(get(), get(), get()) }
+        single<AnimeLocalDataSource> { AnimeLocalDataSourceImpl(get(named("test")), get(), get()) }
+        single<AnimeRemoteDataSource> { AnimeRemoteDataSourceImpl(get(named("test2")), get(), get()) }
     }
 
     val domainLayer = module { ->

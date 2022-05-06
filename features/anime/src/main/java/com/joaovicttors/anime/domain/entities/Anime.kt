@@ -12,4 +12,9 @@ data class Anime(
     val descriptions: Map<String, String>,
     val coverImage: String,
     val score: Float
-) : BaseEntity()
+) : BaseEntity() {
+
+    val title: String? get() = titles["en"]
+    val description: String? get() = descriptions["en"]?.replace("<.*?>".toRegex(), "")
+    val formattedScore: Float get() = (score * 5) / 100
+}

@@ -1,4 +1,4 @@
-package com.joaovicttors.anime.presentation.features.anime_list
+package com.joaovicttors.anime.presentation.features.anime_list.view
 
 import androidx.lifecycle.viewModelScope
 import com.joaovicttors.anime.domain.entities.Anime
