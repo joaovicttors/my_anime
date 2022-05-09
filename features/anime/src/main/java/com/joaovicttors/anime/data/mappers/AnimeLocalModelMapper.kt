@@ -23,8 +23,8 @@ class AnimeLocalModelMapper : BaseMapper<AnimeLocalModel, Anime>() {
     override fun mapFromDomainEntity(data: Anime): AnimeLocalModel {
         return AnimeLocalModel(
             data.id,
-            data.format.ordinal,
-            data.status.ordinal,
+            data.format.index,
+            data.status.index,
             data.titles,
             data.descriptions,
             data.coverImage,

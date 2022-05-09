@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -43,7 +44,6 @@ dependencies {
     implementation project(":features:anime")
 
     kapt "androidx.room:room-compiler:$room_version"
-
 
     // APP COMPAT
     implementation("androidx.appcompat:appcompat:$appcompat_version")

@@ -1,20 +1,21 @@
-package com.joaovicttors.anime.presentation.features.anime_list.view
+package com.joaovicttors.anime.presentation.features.anime_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.joaovicttors.anime.R
 import com.joaovicttors.anime.databinding.FragmentAnimeListBinding
+import com.joaovicttors.anime.domain.entities.Anime
 import com.joaovicttors.anime.presentation.features.anime_list.adapter.AnimeListAdapter
 import com.joaovicttors.base.BaseFragment
-import com.joaovicttors.base.BaseViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 
@@ -22,19 +23,26 @@ class AnimeListView : BaseFragment() {
 
     override val viewModel: AnimeListViewModel by inject()
 
-    private val adapter: AnimeListAdapter by lazy { AnimeListAdapter() }
-
+    private lateinit var adapter: AnimeListAdapter
     private lateinit var binding: FragmentAnimeListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAnimeListBinding.inflate(inflater, container, false)
+        adapter = AnimeListAdapter(::onSpecificAnimeClicked)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolbar()
         recyclerViewFactory()
         viewModel.getAnimeList()
         viewStateObserver()
+    }
+
+    private fun setupToolbar() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = ""
     }
 
     private fun recyclerViewFactory() {
@@ -43,8 +51,8 @@ class AnimeListView : BaseFragment() {
     }
 
     private fun viewStateObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+        lifecycleScope.launch { ->
+            repeatOnLifecycle(Lifecycle.State.STARTED) { ->
                 viewModel.viewState.collect { viewState ->
                     adapter.animeList = viewState.data
                     loadingStateBehavior(viewState.isLoading)
@@ -68,5 +76,9 @@ class AnimeListView : BaseFragment() {
         if (errorMessage != null) {
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun onSpecificAnimeClicked(anime: Anime) {
+        findNavController().navigate(AnimeListViewDirections.onSpecificAnimeClicked(anime))
     }
 }

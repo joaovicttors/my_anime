@@ -11,7 +11,7 @@ class AnimeListItemViewHolder(
     private val binding: AdapterAnimeListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(anime: Anime) {
+    fun bind(anime: Anime, onAnimeClicked: (Anime) -> Unit) {
         binding.anime = anime
         binding.executePendingBindings()
 
@@ -31,5 +31,7 @@ class AnimeListItemViewHolder(
                     binding.shimmer.visibility = View.GONE
                 }
             })
+
+        binding.animeContainer.setOnClickListener { onAnimeClicked(anime) }
     }
 }

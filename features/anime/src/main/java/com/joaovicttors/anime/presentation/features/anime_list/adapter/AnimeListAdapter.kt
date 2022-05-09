@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.joaovicttors.anime.R
 import com.joaovicttors.anime.domain.entities.Anime
 
-class AnimeListAdapter : RecyclerView.Adapter<AnimeListItemViewHolder>() {
+class AnimeListAdapter(
+    private val onAnimeClicked: (Anime) -> Unit
+) : RecyclerView.Adapter<AnimeListItemViewHolder>() {
 
     var animeList: List<Anime> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -18,7 +20,7 @@ class AnimeListAdapter : RecyclerView.Adapter<AnimeListItemViewHolder>() {
         }
 
     override fun onBindViewHolder(holder: AnimeListItemViewHolder, position: Int) {
-        holder.bind(animeList[position])
+        holder.bind(animeList[position], onAnimeClicked)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeListItemViewHolder {

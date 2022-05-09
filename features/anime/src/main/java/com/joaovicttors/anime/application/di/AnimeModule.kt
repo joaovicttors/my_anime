@@ -6,14 +6,11 @@ import com.joaovicttors.anime.data.datasources.remote.AnimeRemoteDataSource
 import com.joaovicttors.anime.data.datasources.remote.AnimeRemoteDataSourceImpl
 import com.joaovicttors.anime.data.mappers.AnimeLocalModelMapper
 import com.joaovicttors.anime.data.mappers.AnimeRemoteModelMapper
-import com.joaovicttors.anime.data.models.AnimeLocalModel
-import com.joaovicttors.anime.data.models.AnimeRemoteModel
 import com.joaovicttors.anime.data.repositories.AnimeRepositoryImpl
 import com.joaovicttors.anime.domain.entities.Anime
 import com.joaovicttors.anime.domain.repositories.AnimeRepository
 import com.joaovicttors.anime.domain.usecases.GetAnimeListUseCase
-import com.joaovicttors.anime.presentation.features.anime_list.view.AnimeListViewModel
-import com.joaovicttors.base.BaseMapper
+import com.joaovicttors.anime.presentation.features.anime_list.AnimeListViewModel
 import com.joaovicttors.base.usecase.BaseUseCase
 import com.joaovicttors.base.usecase.utilities.NoParam
 import org.koin.androidx.viewmodel.dsl.viewModel

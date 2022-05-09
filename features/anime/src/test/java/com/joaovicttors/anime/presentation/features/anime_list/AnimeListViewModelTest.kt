@@ -1,4 +1,4 @@
-package com.joaovicttors.anime.presentation.features.anime_list.view
+package com.joaovicttors.anime.presentation.features.anime_list
 
 import com.joaovicttors.anime.domain.entities.Anime
 import com.joaovicttors.anime.presentation.MainCoroutineScope

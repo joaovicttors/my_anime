@@ -2,11 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/animeListFragment">
+    app:startDestination="@id/anime_nav_graph">
 
-    <fragment
-        android:id="@+id/animeListFragment"
-        android:name="com.joaovicttors.anime.presentation.features.anime_list.view.AnimeListView"
-        android:label="animeListFragment"/>
+    <include app:graph="@navigation/anime_nav_graph" />
 
 </navigation>
